@@ -87,6 +87,7 @@ a{
 
 #top{
   max-height:60px;
+  justify-content: center;
 }
 
 #search{

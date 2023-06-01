@@ -33,12 +33,19 @@ export function Register() {
     }
 
     return (
-        <form>
+        <body>
+            <div id="main">
+            <div id="top">Rejestracja</div>
+            <div id="middle">
+            <form>
             <input required onChange={(e) => {setName(e.target.value);}} type="name" name="imie" placeholder="Imie"></input>
             <input required onChange={(e) => {setEmail(e.target.value);}} type="email" name="email" placeholder="Email"></input>
             <input required onChange={(e) => {setPassword(e.target.value);}} type="password" name="password" placeholder="Hasło"></input>
             <button type="submit" onClick={register}>Zarejestruj się</button>
             <Link to="/Login">Masz konto? Zaloguj się</Link>
-        </form>
+            </form>
+            </div>
+            </div>
+        </body>
     );
 }

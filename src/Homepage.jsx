@@ -24,12 +24,14 @@ export function Homepage() {
     <div id="main">
       <div id="top">
         <div id="search">
+          szukaj
         </div>
         <div id="navigation">
           <div id="button" onClick={ShowPosts}></div>
           <div id="button" onClick={ShowProfiles}></div>
         </div>
         <div id="user">
+          użytnik
         </div>
       </div>
       <div>
@@ -61,7 +63,6 @@ function TileProfile(){
 }
 
 function ShowTiles(){
-  
   if (show === 1){
     return (
       <><TilePost /></>
