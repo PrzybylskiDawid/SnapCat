@@ -19,15 +19,15 @@ div{
 }
 
 #middle, #delete{
-  background-color:#696969;
+  background-color:#ffffff;
 }
 
 #right, #left, #person{
-  background-color:#585858;
+  background-color:#e9e9e9;
 }
 
 #top, #add{
-  background-color:#D1BF18;
+  background-color:#50a3c9;
 }
 
 #button:hover{
@@ -47,7 +47,7 @@ div{
 }
 
 #button, #profile_pic, #person, #post, #add, #delete{
-  border-radius: 25px;
+  border-radius: 20px;
 }
 
 #person > #profile_pic{
