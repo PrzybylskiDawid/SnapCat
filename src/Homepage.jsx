@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import logo from './logo.png';
 import d3fault from './DefaultProfilePic.jpg';
 import { db } from "./firebase";
-import Avatar from 'react-avatar';
 
 let show = 1;
 
@@ -83,7 +82,6 @@ export function Homepage({ user }) {
                     filteredUsers.map((user1) => (
                       <li>
                         <a href="/">
-                          <Avatar className="searchAvatar" src={d3fault}></Avatar>
                           <h3>{user1.displayName}</h3>
                         </a>
                       </li>
@@ -95,8 +93,8 @@ export function Homepage({ user }) {
             </div>
           </div>
           <div id="navigation">
-            <div id="button"></div>
-            <div id="button"></div>
+            <div id="button" onClick={ShowPosts}></div>
+            <div id="button" onClick={ShowProfiles}></div>
           </div>
           <div id="user">
             <img src={user?.PhotoURL} alt="profile"></img>{user?.displayName}
