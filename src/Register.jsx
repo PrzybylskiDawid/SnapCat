@@ -22,7 +22,7 @@ export function Register() {
                         uid: auth.user.uid,
                         displayName: auth.user.displayName,
                         email: auth.user.email,
-                        PhotoURL: "DefaultPhotoPic.jpg",
+                        PhotoURL: "norman.png",
                         bio: ""
                     })
                     navigate("/login")
