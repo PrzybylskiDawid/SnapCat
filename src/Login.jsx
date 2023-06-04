@@ -18,11 +18,22 @@ export function Login() {
     }
 
     return (
-        <form>
-            <input type="email" name="email" placeholder="email" onChange={(e) => setEmail(e.target.value)}></input>
-            <input type="password" name="password" placeholder="hasło"onChange={(e) => setPassword(e.target.value)}></input>
-            <button type="submit" onClick={login}>Zaloguj się</button>
-            <Link to="/register">Nie masz konta? Zarejestruj się</Link>
-        </form>
+        <body>
+            <div id="main">
+            <div id="top">Rejestracja</div>
+            <div>
+            <div id="left"></div>
+            <div id="middle">
+            <form>
+            <input type="email" name="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} id="button"></input>
+            <input type="password" name="password" placeholder="hasło"onChange={(e) => setPassword(e.target.value)} id="button"></input>
+            <button type="submit" onClick={login} id="button">Zaloguj się</button>
+            <Link to="/register" id="link">Nie masz konta? Zarejestruj się</Link>
+            </form>
+            </div>
+            <div id="right"></div>
+            </div>
+            </div>
+        </body>
     );
 }
