@@ -13,6 +13,7 @@ export function Homepage({ user }) {
   const [searchTerm, setSearchTerm] = useState();
   const [filteredUsers, setFilteredUsers] = useState([]);
 
+  // wyszukiwanie
   useEffect(() => {
     db.collection('users').onSnapshot(snapshot => {
       setUsers(snapshot.docs.map((doc) => doc.data()))
@@ -35,7 +36,24 @@ export function Homepage({ user }) {
   if (user === false) {
     navigate("/Login")
   }
-  ////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // pojawianie i znikanie wyszukiwania
+  const showSearch = () => {
+    document.getElementsByClassName('logo')[0].style.display = 'none';
+    document.getElementsByClassName('goback')[0].style.display = 'block';
+    document.getElementsByClassName('searchResults')[0].style.display = 'block';
+  }
+
+  const hideSearch = () => {
+    document.getElementsByClassName('logo')[0].style.display = 'block';
+    document.getElementsByClassName('goback')[0].style.display = 'none';
+    document.getElementsByClassName('searchResults')[0].style.display = 'none';
+  }
+
+  // wylogowywanie
+
+  
+////////////////////////////////////////////////////////////////////////////////////////////////
   const [tiles, setTiles] = useState(ShowTiles());
 
   useEffect(() => {
@@ -55,24 +73,25 @@ export function Homepage({ user }) {
       <div id="main">
         <div id="top">
           <div className="search">
-              <img src={logo} alt="logo" className="logo" style={{width: 60 + "px"}} />
-            <input type="text" className="searchBox" placeholder="Szukaj nya SnapCacie :3" onChange={updateSearchResults} />
+            <img src={logo} alt="logo" className="goback" style={{ width: 60 + "px", display: "none" }} onClick={hideSearch} />
+            <img src={logo} alt="logo" className="logo" style={{ width: 60 + "px" }} />
+            <input type="text" className="searchBox" placeholder="Szukaj nya SnapCacie :3" onClick={showSearch} onChange={updateSearchResults} />
             <div className="searchResults">
-            <ul id="list" style={{ listStyle: 'none' }}>
-              {
-                users !== undefined && (
-                  filteredUsers.map((user1) => (
-                    <li>
-                      <a href="/">
-                        <Avatar src={d3fault}></Avatar>
-                        <h3>{user1.displayName}</h3>
-                      </a>
-                    </li>
-                  ))
-                )
-              }
+              <ul id="list" style={{ listStyle: 'none' }}>
+                {
+                  users !== undefined && (
+                    filteredUsers.map((user1) => (
+                      <li>
+                        <a href="/">
+                          <Avatar className="searchAvatar" src={d3fault}></Avatar>
+                          <h3>{user1.displayName}</h3>
+                        </a>
+                      </li>
+                    ))
+                  )
+                }
 
-            </ul>
+              </ul>
             </div>
           </div>
           <div id="navigation">
