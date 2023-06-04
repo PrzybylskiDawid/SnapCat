@@ -51,9 +51,9 @@ export function Homepage({ user }) {
   }
 
   // wylogowywanie
+  let amongus = localStorage;
 
-  
-////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////
   const [tiles, setTiles] = useState(ShowTiles());
 
   useEffect(() => {
@@ -97,6 +97,9 @@ export function Homepage({ user }) {
           <div id="navigation">
             <div id="button"></div>
             <div id="button"></div>
+          </div>
+          <div id="user">
+            <img src={user?.PhotoURL} alt="profile"></img>{user?.displayName}
           </div>
         </div>
         <div>
