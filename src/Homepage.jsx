@@ -105,14 +105,14 @@ export function Homepage({ user }) {
             <div id="button" onClick={ShowProfiles}></div>
           </div>
           <div id="user">
-            <img src={user?.PhotoURL} alt="profile"></img>{user?.displayName}
+            <img src={user?.PhotoURL} alt="profile" id="profile_pic"></img>
           </div>
         </div>
         <div>
           <div id="left">
-            <div id="button"></div>
-            <div id="button"></div>
-            <div id="button"></div>
+            <div id="button"><img src={user?.PhotoURL} id="profile_pic"></img><a>{user?.displayName}</a></div>
+            <div id="button"><img id="profile_pic"></img><a>Znajomi</a></div>
+            <div id="button"><img id="profile_pic"></img><a>Odkrywaj</a></div>
           </div>
           <div id="middle">{tiles}</div>
           <div id="right">
@@ -126,7 +126,7 @@ export function Homepage({ user }) {
 
 function TilePost() {
   return (
-    <div id="post"><div id="button"><div id="profile_pic"></div><a>user</a></div></div>
+    <div id="post"><div id="button"><div id="profile_pic"></div><a>Jakiś znajomy</a></div></div>
   )
 }
 
@@ -151,6 +151,6 @@ function ShowTiles() {
 
 function FriendButton() {
   return (
-    <div id="button"></div>
+    <div id="button"><a>Jakiś znajomy</a><img id="profile_pic"></img></div>
   )
 }
