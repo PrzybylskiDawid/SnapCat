@@ -119,8 +119,8 @@ export function Homepage({ user }) {
             </div>
           </div>
           <div id="navigation">
-            <div id="button" onClick={ShowPosts}></div>
-            <div id="button" onClick={ShowProfiles}></div>
+            <div id="button" onClick={ShowPosts}><img id="profile_pic"></img></div>
+            <div id="button" onClick={ShowProfiles}><img id="profile_pic"></img></div>
           </div>
           <div id="user">
             <img src={user?.PhotoURL} alt="profile" id="profile_pic"></img>

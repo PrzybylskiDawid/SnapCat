@@ -35,9 +35,8 @@ form {
   background-color: #50a3c9;
 }
 
-#button:hover,
-#suggestion:hover {
-  background-color: #ffffff66;
+#button:hover {
+  background-color: #ffffff88;
 }
 
 #post>#button,
@@ -145,6 +144,7 @@ a {
   margin: 5px;
   width: 150px;
   height: 50px;
+  align-items: center;
 }
 
 #user {
