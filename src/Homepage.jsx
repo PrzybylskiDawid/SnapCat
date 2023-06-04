@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import logo from './logo.png';
 import d3fault from './DefaultProfilePic.jpg';
 import { db } from "./firebase";
+import { wait } from "@testing-library/user-event/dist/utils";
+import { specialCharMap } from "@testing-library/user-event/dist/keyboard";
 
 let show = 1;
 
@@ -39,6 +41,22 @@ export function Homepage({ user }) {
   if (user === false) {
     navigate("/Login")
   }
+  
+  //obrazek profilu
+  
+  let kot = user?.displayName;
+
+  const ser = users.filter(user => {
+
+    return user.displayName == kot;
+  })
+
+  if (ser[0] !== undefined) {
+    
+    let profile = "https://firebasestorage.googleapis.com/v0/b/snapcat-e6711.appspot.com/o/images%2F"+ser[0].PhotoURL+"?alt=media&token=41984364-eebc-4051-b45e-1d72e49ef219"
+    document.getElementById("profilePic").setAttribute("src", profile);
+  }
+
 
   // pojawianie i znikanie wyszukiwania
   const showSearch = () => {
@@ -64,7 +82,7 @@ export function Homepage({ user }) {
   const [tiles, setTiles] = useState(ShowTiles());
 
   useEffect(() => {
-    setTiles(ShowTiles());
+    //setTiles(ShowTiles());
   });
 
   function ShowPosts() {
@@ -105,7 +123,7 @@ export function Homepage({ user }) {
             <div id="button" onClick={ShowProfiles}></div>
           </div>
           <div id="user">
-            <img src={user?.PhotoURL} alt="profile"></img>{user?.displayName}
+            <img id="profilePic" src=""></img>{user?.displayName}
           </div>
         </div>
         <div>
