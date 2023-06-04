@@ -12,6 +12,10 @@ export function Homepage({ user }) {
   const [searchTerm, setSearchTerm] = useState();
   const [filteredUsers, setFilteredUsers] = useState([]);
 
+  function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }
+
   // wyszukiwanie
   useEffect(() => {
     db.collection('users').onSnapshot(snapshot => {
@@ -41,12 +45,16 @@ export function Homepage({ user }) {
     document.getElementsByClassName('logo')[0].style.display = 'none';
     document.getElementsByClassName('goback')[0].style.display = 'block';
     document.getElementsByClassName('searchResults')[0].style.display = 'block';
+    delay(100).then(() => document.getElementsByClassName('searchResults')[0].style.height = '200px');
+    delay(300).then(() => document.getElementById('list').style.display = 'block');
   }
 
   const hideSearch = () => {
     document.getElementsByClassName('logo')[0].style.display = 'block';
     document.getElementsByClassName('goback')[0].style.display = 'none';
-    document.getElementsByClassName('searchResults')[0].style.display = 'none';
+    delay(300).then(() => document.getElementsByClassName('searchResults')[0].style.display = 'none');
+    document.getElementsByClassName('searchResults')[0].style.height = '0';
+    document.getElementById('list').style.display = 'none';
   }
 
   // wylogowywanie
@@ -71,18 +79,18 @@ export function Homepage({ user }) {
     <body>
       <div id="main">
         <div id="top">
-          <div className="search">
-            <img src={logo} alt="logo" className="goback" style={{ width: 60 + "px", display: "none" }} onClick={hideSearch} />
-            <img src={logo} alt="logo" className="logo" style={{ width: 60 + "px" }} />
-            <input type="text" className="searchBox" placeholder="Szukaj nya SnapCacie :3" onClick={showSearch} onChange={updateSearchResults} />
+          <img src={logo} alt="logo" className="logo" id="profile_pic" />
+          <img src={logo} alt="logo" className="goback" id="profile_pic" style={{display: "none" }} onClick={hideSearch} />
+            <div className="search">
+            <input type="text" className="searchBox" placeholder="Szukaj nya SnapCacie :3" onClick={showSearch} onChange={updateSearchResults} id="button" />
             <div className="searchResults">
               <ul id="list" style={{ listStyle: 'none' }}>
                 {
                   users !== undefined && (
                     filteredUsers.map((user1) => (
                       <li>
-                        <a href="/">
-                          <h3>{user1.displayName}</h3>
+                        <a id="suggestion" href="/">
+                          {user1.displayName}
                         </a>
                       </li>
                     ))

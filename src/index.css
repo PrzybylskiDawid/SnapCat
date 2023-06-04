@@ -35,7 +35,8 @@ form {
   background-color: #50a3c9;
 }
 
-#button:hover {
+#button:hover,
+#suggestion:hover {
   background-color: #ffffff66;
 }
 
@@ -60,7 +61,8 @@ form {
 #post,
 #add,
 #delete,
-form {
+form,
+.searchResults{
   border-radius: 20px;
 }
 
@@ -105,8 +107,26 @@ a {
   font-size: 40px;
 }
 
-#search {
+#top>#profile_pic{
+  margin: auto 5px auto 5px;
+}
+
+.search {
   justify-content: left;
+}
+
+.search>#button{
+  min-height: 50px;
+  min-width: 300px;
+  border: 0px;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+.search>#button:hover{
+  background-color: #ffffff;
 }
 
 #navigation {
@@ -210,16 +230,17 @@ a {
 }
 
 .searchResults {
-  width: 250px;
-  height: 300px;
+  width: 311px;
+  height: 0px;
   background:#ffffff;
   position: absolute;
   display: none;
-  border-radius: 5%;
-  margin-top: 60px;
-  margin-left: 60px;
-
-  transition: 10s;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  margin-top: 42px;
+  margin-left: 0px;
+  padding-top: 10px;
+  transition: 0.3s;
   top: 0;
 }
 
@@ -248,5 +269,19 @@ form>#button {
 #link {
   margin-left: auto;
   margin-right: auto;
-  
+}
+
+#list {
+  margin-top: 5px;
+  padding-left: 15px;
+}
+
+#suggestion {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+#suggestion:link {
+  color: black;
+  text-decoration: none;
 }
