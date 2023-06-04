@@ -82,7 +82,7 @@ export function Homepage({ user }) {
   const [tiles, setTiles] = useState(ShowTiles());
 
   useEffect(() => {
-    //setTiles(ShowTiles());
+    setTiles(ShowTiles());
   });
 
   function ShowPosts() {
