@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import logo from './logo.png';
-import d3fault from './DefaultProfilePic.jpg';
 import homeIcon from './home.png';
 import usersIcon from './users.png';
 import plusIcon from './plus.png';
 import { db } from "./firebase";
-import { wait } from "@testing-library/user-event/dist/utils";
-import { specialCharMap } from "@testing-library/user-event/dist/keyboard";
 import { CreatePost } from "./Post.jsx";
 import { UserSettings } from "./User.jsx";
 
