@@ -61,7 +61,10 @@ form {
 #add,
 #delete,
 form,
-.searchResults{
+.searchResults,
+#window,
+#window>#top,
+#window>#middle{
   border-radius: 20px;
 }
 
@@ -319,4 +322,32 @@ form>#button {
 #suggestion:link {
   color: black;
   text-decoration: none;
+}
+
+#blackout{
+  position:absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: #00000066;
+  flex-direction: column;
+  align-items: center;
+}
+
+#window {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+#window>#top{
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  padding-bottom: 5px;
+}
+
+#window>#middle{
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }

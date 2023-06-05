@@ -5,8 +5,15 @@ import d3fault from './DefaultProfilePic.jpg';
 import { db } from "./firebase";
 import { wait } from "@testing-library/user-event/dist/utils";
 import { specialCharMap } from "@testing-library/user-event/dist/keyboard";
+import { CreatePost } from "./Post.jsx";
+import { UserSettings } from "./User.jsx";
 
 let show = 1;
+let showWindow = 1;
+
+export function closeWindow() {
+  document.getElementById('blackout').style.display = 'none';
+}
 
 export function Homepage({ user }) {
 
@@ -65,26 +72,53 @@ export function Homepage({ user }) {
 
   ////////////////////////////////////////////////////////////////////////////////////////////////
   const [tiles, setTiles] = useState(ShowTiles());
-
-  useEffect(() => {
-    setTiles(ShowTiles());
-  });
+  const [window, setWindow] = useState(openWindow());
 
   function ShowPosts() {
     show = 1;
+    setTiles(ShowTiles());
   }
 
   function ShowProfiles() {
     show = 2;
+    setTiles(ShowTiles());
+  }
+
+  function openWindow() {
+    if (showWindow === 1){
+      return (
+        <><UserSettings /></>
+      )
+    }
+    if (showWindow === 2){
+      return (
+        <><CreatePost /></>
+      )
+    }
+  }
+
+  function openUserSettings() {
+    showWindow = 1;
+    setWindow(openWindow());
+    document.getElementById('blackout').style.display = 'flex';
+  }
+
+  function openPostCreation() {
+    showWindow = 2;
+    setWindow(openWindow());
+    document.getElementById('blackout').style.display = 'flex';
   }
 
   return (
     <body>
+      <div id="blackout">
+        {window}
+      </div>
       <div id="main">
         <div id="top">
           <img src={logo} alt="logo" className="logo" id="profile_pic" />
-          <img src={logo} alt="logo" className="goback" id="profile_pic" style={{display: "none" }} onClick={hideSearch} />
-            <div className="search">
+          <img src={logo} alt="logo" className="goback" id="profile_pic" style={{ display: "none" }} onClick={hideSearch} />
+          <div className="search">
             <input type="text" className="searchBox" placeholder="Szukaj nya SnapCacie :3" onClick={showSearch} onChange={updateSearchResults} id="button" />
             <div className="searchResults">
               <ul id="list" style={{ listStyle: 'none' }}>
@@ -109,14 +143,15 @@ export function Homepage({ user }) {
             <div id="button" onClick={ShowProfiles}><img id="profile_pic"></img></div>
           </div>
           <div id="user">
-            <img src={user?.PhotoURL} alt="profile" id="profile_pic"></img>
+            <img src={user?.PhotoURL} alt="profile" id="profile_pic" onClick={openUserSettings}></img>
           </div>
         </div>
         <div>
           <div id="left">
-            <div id="button"><img id="profilePic"></img><a>{user?.displayName}</a></div>
-            <div id="button"><img id="profile_pic"></img><a>Znajomi</a></div>
-            <div id="button"><img id="profile_pic"></img><a>Odkrywaj</a></div>
+            <div id="button" onClick={openUserSettings}><img id="profile_pic"></img><a>{user?.displayName}</a></div>
+            <div id="button" onClick={ShowProfiles}><img id="profile_pic"></img><a>Znyajomi</a></div>
+            <div id="button" onClick={ShowPosts}><img id="profile_pic"></img><a>Odkwywaj</a></div>
+            <div id="button" onClick={openPostCreation}><img id="profile_pic"></img><a>Dodaj posta</a></div>
           </div>
           <div id="middle">{tiles}</div>
           <div id="right">
@@ -124,6 +159,7 @@ export function Homepage({ user }) {
           </div>
         </div>
       </div>
+      
     </body>
   );
 }
