@@ -26,6 +26,7 @@ export function Homepage({ user }) {
 
     if (users !== undefined) {
       const finalUsers = users.filter(user => {
+        console.log(user.PhotoURL)
         return user.displayName.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
       })
 
@@ -41,22 +42,6 @@ export function Homepage({ user }) {
   if (user === false) {
     navigate("/Login")
   }
-  
-  //obrazek profilu
-  
-  let kot = user?.displayName;
-
-  const ser = users.filter(user => {
-
-    return user.displayName == kot;
-  })
-
-  if (ser[0] !== undefined) {
-    
-    let profile = "https://firebasestorage.googleapis.com/v0/b/snapcat-e6711.appspot.com/o/images%2F"+ser[0].PhotoURL+"?alt=media&token=41984364-eebc-4051-b45e-1d72e49ef219"
-    document.getElementById("profilePic").setAttribute("src", profile);
-  }
-
 
   // pojawianie i znikanie wyszukiwania
   const showSearch = () => {
@@ -107,8 +92,9 @@ export function Homepage({ user }) {
                   users !== undefined && (
                     filteredUsers.map((user1) => (
                       <li>
+                        <img src={user1.PhotoURL} alt="" />
                         <a id="suggestion" href="/">
-                          {user1.displayName}
+                          {user1.PhotoURL}
                         </a>
                       </li>
                     ))
@@ -128,7 +114,7 @@ export function Homepage({ user }) {
         </div>
         <div>
           <div id="left">
-            <div id="button"><img src={user?.PhotoURL} id="profile_pic"></img><a>{user?.displayName}</a></div>
+            <div id="button"><img id="profilePic"></img><a>{user?.displayName}</a></div>
             <div id="button"><img id="profile_pic"></img><a>Znajomi</a></div>
             <div id="button"><img id="profile_pic"></img><a>Odkrywaj</a></div>
           </div>
