@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import logo from './logo.png';
 import d3fault from './DefaultProfilePic.jpg';
+import homeIcon from './home.png';
+import usersIcon from './users.png';
+import plusIcon from './plus.png';
 import { db } from "./firebase";
 import { wait } from "@testing-library/user-event/dist/utils";
 import { specialCharMap } from "@testing-library/user-event/dist/keyboard";
@@ -139,8 +142,8 @@ export function Homepage({ user }) {
             </div>
           </div>
           <div id="navigation">
-            <div id="button" onClick={ShowPosts}><img id="profile_pic"></img></div>
-            <div id="button" onClick={ShowProfiles}><img id="profile_pic"></img></div>
+            <div id="button" onClick={ShowPosts}><img src={homeIcon} id="profile_pic"></img></div>
+            <div id="button" onClick={ShowProfiles}><img src={usersIcon} id="profile_pic"></img></div>
           </div>
           <div id="user">
             <img src={user?.PhotoURL} alt="profile" id="profile_pic" onClick={openUserSettings}></img>
@@ -149,9 +152,9 @@ export function Homepage({ user }) {
         <div>
           <div id="left">
             <div id="button" onClick={openUserSettings}><img id="profile_pic"></img><a>{user?.displayName}</a></div>
-            <div id="button" onClick={ShowProfiles}><img id="profile_pic"></img><a>Znyajomi</a></div>
-            <div id="button" onClick={ShowPosts}><img id="profile_pic"></img><a>Odkwywaj</a></div>
-            <div id="button" onClick={openPostCreation}><img id="profile_pic"></img><a>Dodaj posta</a></div>
+            <div id="button" onClick={ShowProfiles}><img src={usersIcon} id="profile_pic"></img><a>Znyajomi</a></div>
+            <div id="button" onClick={ShowPosts}><img src={homeIcon} id="profile_pic"></img><a>Odkwywaj</a></div>
+            <div id="button" onClick={openPostCreation}><img src={plusIcon} id="profile_pic"></img><a>Dodaj posta</a></div>
           </div>
           <div id="middle">{tiles}</div>
           <div id="right">
