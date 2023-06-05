@@ -7,9 +7,6 @@ import { Xd } from "./Xd"
 import { auth } from "./firebase"
 import { useEffect } from "react";
 
-
-
-
 function App() {
 
   const [user, setUser] = useState();

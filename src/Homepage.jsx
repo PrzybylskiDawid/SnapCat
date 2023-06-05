@@ -8,6 +8,30 @@ import { db } from "./firebase";
 import { CreatePost } from "./Post.jsx";
 import { UserSettings } from "./User.jsx";
 import { OtherProfile } from "./Profile";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+// Create a reference to the file we want to download
+const storage = getStorage();
+const img = "";
+
+function getPostImage(post) {
+  const starsRef = ref(storage, post);
+  getDownloadURL(starsRef)
+    .then((url, i) => {
+
+      const kocurek = document.getElementById('21');
+      if (kocurek == null) {
+        console.log("D:");
+      }
+      else {
+        const kocur = document.getElementById('21');
+        kocur.setAttribute('src', url);
+        kocur.setAttribute('id', "1");
+      }
+
+
+    })
+}
 
 let show = 1;
 let showWindow = 1;
@@ -18,13 +42,18 @@ export function closeWindow() {
 
 export function Homepage({ user }) {
 
+
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState();
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [divCount, setDivCount] = useState();
 
   function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
   }
+
+
 
   // wyszukiwanie
   useEffect(() => {
@@ -32,9 +61,12 @@ export function Homepage({ user }) {
       setUsers(snapshot.docs.map((doc) => doc.data()))
     })
 
+    db.collection('posts').onSnapshot(snapshot => {
+      setPosts(snapshot.docs.map((doc) => doc.data()))
+    })
+
     if (users !== undefined) {
       const finalUsers = users.filter(user => {
-        console.log(user.PhotoURL)
         return user.displayName.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
       })
 
@@ -68,9 +100,6 @@ export function Homepage({ user }) {
     document.getElementById('list').style.display = 'none';
   }
 
-  // wylogowywanie
-  let amongus = localStorage;
-
   ////////////////////////////////////////////////////////////////////////////////////////////////
   const [tiles, setTiles] = useState(ShowTiles());
   const [window, setWindow] = useState(openWindow());
@@ -78,6 +107,7 @@ export function Homepage({ user }) {
   function ShowPosts() {
     show = 1;
     setTiles(ShowTiles());
+    setDivCount(posts.length);
   }
 
   function ShowProfiles() {
@@ -123,7 +153,13 @@ export function Homepage({ user }) {
 
   function TilePost() {
     return (
-      <div id="post"><div id="button" onClick={openOtherProfile}><div id="profile_pic"></div><a>Jakiś znajomy</a></div></div>
+      <div id="post">
+        <img src="" id="21" alt="image"></img>
+        <div id="button" onClick={openOtherProfile}>
+          <div id="profile_pic">
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -133,11 +169,32 @@ export function Homepage({ user }) {
     )
   }
 
+  function penis() {
+    if (posts.length != 0) {
+      for (let i = 0; i < posts.length; i++) {
+        getPostImage(posts[i].ImageURL, i)
+      }
+    }
+  }
+
+  const renderDivs = () => {
+    const divs = [];
+    const menel = <TilePost />
+    
+    for (let i = 0; i < divCount; i++) {
+      divs.push(menel);
+    }
+    return divs;
+  };
+
   function ShowTiles() {
+
+    const menel = <TilePost />
+
     if (show === 1) {
-      return (
-        <><TilePost /></>
-      )
+
+      penis();
+
     }
     if (show === 2) {
       return (
@@ -186,7 +243,7 @@ export function Homepage({ user }) {
             <div id="button" onClick={ShowProfiles}><img src={usersIcon} id="profile_pic"></img></div>
           </div>
           <div id="user">
-            <img src={user?.PhotoURL} alt="profile" id="profile_pic" onClick={openUserSettings}></img>
+            <img src={user?.PhotoURL} id="profile_pic" onClick={openUserSettings}></img>
           </div>
         </div>
         <div>
@@ -196,7 +253,9 @@ export function Homepage({ user }) {
             <div id="button" onClick={ShowPosts}><img src={homeIcon} id="profile_pic"></img><a>Odkwywaj</a></div>
             <div id="button" onClick={openPostCreation}><img src={plusIcon} id="profile_pic"></img><a>Dodaj posta</a></div>
           </div>
-          <div id="middle">{tiles}</div>
+          <div id="middle"><div>
+      {renderDivs()}
+    </div></div>
           <div id="right">
             <FriendButton />
           </div>
