@@ -19,7 +19,8 @@ div {
 }
 
 #middle,
-#delete {
+#delete,
+#window {
   background-color: #ffffff;
 }
 
@@ -31,16 +32,18 @@ form {
 }
 
 #top,
-#add {
+#add,
+#window>div>#button {
   background-color: #50a3c9;
 }
 
-#button:hover {
+#button:hover{
   background-color: #ffffff88;
 }
 
 #post>#button,
-#profile_pic>#button {
+#profile_pic>#button,
+#window>div>#button:hover {
   background-color: #ffffff88;
 }
 
@@ -350,4 +353,25 @@ form>#button {
 #window>#middle{
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+}
+
+#window>div>#profile_pic{
+  min-width: 150px;
+  min-height: 150px;
+  margin: 5px;
+}
+
+#window>div>#button{
+  min-width: 250px;
+  min-height: 50px;
+  margin: 5px;
+}
+
+#window>div>div{
+  margin: 10px;
+}
+
+#window>a{
+  margin: 5px 10px 5px 10px;
+  text-align: center;
 }

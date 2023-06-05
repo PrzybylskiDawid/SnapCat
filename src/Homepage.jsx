@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import logo from './logo.png';
 import homeIcon from './home.png';
 import usersIcon from './users.png';
@@ -7,6 +7,7 @@ import plusIcon from './plus.png';
 import { db } from "./firebase";
 import { CreatePost } from "./Post.jsx";
 import { UserSettings } from "./User.jsx";
+import { OtherProfile } from "./Profile";
 
 let show = 1;
 let showWindow = 1;
@@ -85,14 +86,19 @@ export function Homepage({ user }) {
   }
 
   function openWindow() {
-    if (showWindow === 1){
+    if (showWindow === 1) {
       return (
         <><UserSettings /></>
       )
     }
-    if (showWindow === 2){
+    if (showWindow === 2) {
       return (
         <><CreatePost /></>
+      )
+    }
+    if (showWindow === 3) {
+      return (
+        <><OtherProfile /></>
       )
     }
   }
@@ -107,6 +113,43 @@ export function Homepage({ user }) {
     showWindow = 2;
     setWindow(openWindow());
     document.getElementById('blackout').style.display = 'flex';
+  }
+
+  function openOtherProfile() {
+    showWindow = 3;
+    setWindow(openWindow());
+    document.getElementById('blackout').style.display = 'flex';
+  }
+
+  function TilePost() {
+    return (
+      <div id="post"><div id="button" onClick={openOtherProfile}><div id="profile_pic"></div><a>Jakiś znajomy</a></div></div>
+    )
+  }
+
+  function TileProfile() {
+    return (
+      <div id="person"><div id="profile_pic"><div id="button" onClick={openOtherProfile}><a>imie</a></div></div><div id="add"><div id="button"><a>dodaj</a></div></div><div id="delete"><div id="button"><a>dodaj</a></div></div></div>
+    )
+  }
+
+  function ShowTiles() {
+    if (show === 1) {
+      return (
+        <><TilePost /></>
+      )
+    }
+    if (show === 2) {
+      return (
+        <><TileProfile /></>
+      )
+    }
+  }
+
+  function FriendButton() {
+    return (
+      <div id="button" onClick={openOtherProfile}><a>Jakiś znajomy</a><img id="profile_pic"></img></div>
+    )
   }
 
   return (
@@ -159,38 +202,7 @@ export function Homepage({ user }) {
           </div>
         </div>
       </div>
-      
+
     </body>
   );
-}
-
-function TilePost() {
-  return (
-    <div id="post"><div id="button"><div id="profile_pic"></div><a>Jakiś znajomy</a></div></div>
-  )
-}
-
-function TileProfile() {
-  return (
-    <div id="person"><div id="profile_pic"><div id="button"></div></div><div id="add"><div id="button"></div></div><div id="delete"><div id="button"></div></div></div>
-  )
-}
-
-function ShowTiles() {
-  if (show === 1) {
-    return (
-      <><TilePost /></>
-    )
-  }
-  if (show === 2) {
-    return (
-      <><TileProfile /></>
-    )
-  }
-}
-
-function FriendButton() {
-  return (
-    <div id="button"><a>Jakiś znajomy</a><img id="profile_pic"></img></div>
-  )
 }
