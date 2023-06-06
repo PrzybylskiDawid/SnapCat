@@ -154,10 +154,12 @@ export function Homepage({ user }) {
   function TilePost() {
     return (
       <div id="post">
-        <img src="" id="21" alt="image"></img>
+        <img className="post_pic" src="" id="21" alt="image"></img>
+        <div>
         <div id="button" onClick={openOtherProfile}>
           <div id="profile_pic">
           </div>
+        </div>
         </div>
       </div>
     )
